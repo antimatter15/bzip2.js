@@ -1,0 +1,13 @@
+<script src="v2.js"></script>
+<script>
+(function(){
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', 'hhgtg.bz2', true);
+  xhr.responseType = 'arraybuffer';
+  xhr.send();
+  xhr.onload = function(){
+    var bytes = new Uint8Array(xhr.response);
+    document.body.innerText = bzip2.simple(bzip2.array(bytes));
+  }
+})();
+</script>
