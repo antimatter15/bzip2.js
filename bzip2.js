@@ -3,15 +3,15 @@
   
   Copyright 2011 by antimatter15 (antimatter15@gmail.com)
   
-	Based on micro-bunzip by Rob Landley (rob@landley.net).
+  Based on micro-bunzip by Rob Landley (rob@landley.net).
 
-	Based on bzip2 decompression code by Julian R Seward (jseward@acm.org),
-	which also acknowledges contributions by Mike Burrows, David Wheeler,
-	Peter Fenwick, Alistair Moffat, Radford Neal, Ian H. Witten,
-	Robert Sedgewick, and Jon L. Bentley.
+  Based on bzip2 decompression code by Julian R Seward (jseward@acm.org),
+  which also acknowledges contributions by Mike Burrows, David Wheeler,
+  Peter Fenwick, Alistair Moffat, Radford Neal, Ian H. Witten,
+  Robert Sedgewick, and Jon L. Bentley.
 
-	I hereby release this code under the GNU Library General Public License
-	(LGPL) version 2, available at http://www.gnu.org/copyleft/lgpl.html
+  I hereby release this code under the GNU Library General Public License
+  (LGPL) version 2, available at http://www.gnu.org/copyleft/lgpl.html
 */
 
 var bzip2 = {};
@@ -162,7 +162,7 @@ bzip2.decompress = function(bits, size, len){
       if(selector >= nSelectors) throw "meow i'm a kitty, that's an error";
       hufGroup = groups[selectors[selector++]];
       base = hufGroup.base.subarray(1);
-    	limit = hufGroup.limit.subarray(1);
+      limit = hufGroup.limit.subarray(1);
     }
     i = hufGroup.minLen;
     j = bits(i);
@@ -175,32 +175,32 @@ bzip2.decompress = function(bits, size, len){
     j -= base[i];
     if(j < 0 || j >= MAX_SYMBOLS) throw "moo i'm a cow";
     var nextSym = hufGroup.permute[j];
-  	if (nextSym == SYMBOL_RUNA || nextSym == SYMBOL_RUNB) {
-  	  if(!runPos){
-  	    runPos = 1;
-  	    t = 0;
-  	  }
-  	  if(nextSym == SYMBOL_RUNA) t += runPos;
-  	  else t += 2 * runPos;
-  	  runPos <<= 1;
-  	  continue;
-  	}
-  	if(runPos){
-  	  runPos = 0;
-  	  if(count + t >= bufsize) throw "Boom.";
-  	  uc = symToByte[mtfSymbol[0]];
-  	  byteCount[uc] += t;
-  	  while(t--) buf[count++] = uc;
-  	}
-  	if(nextSym > symTotal) break;
-  	if(count >= bufsize) throw "I can't think of anything. Error";
-  	i = nextSym -1;
-  	uc = mtfSymbol[i];
-  	mtfSymbol.splice(i, 1);
-  	mtfSymbol.splice(0, 0, uc);
-  	uc = symToByte[uc];
-  	byteCount[uc]++;
-  	buf[count++] = uc;
+    if (nextSym == SYMBOL_RUNA || nextSym == SYMBOL_RUNB) {
+      if(!runPos){
+        runPos = 1;
+        t = 0;
+      }
+      if(nextSym == SYMBOL_RUNA) t += runPos;
+      else t += 2 * runPos;
+      runPos <<= 1;
+      continue;
+    }
+    if(runPos){
+      runPos = 0;
+      if(count + t >= bufsize) throw "Boom.";
+      uc = symToByte[mtfSymbol[0]];
+      byteCount[uc] += t;
+      while(t--) buf[count++] = uc;
+    }
+    if(nextSym > symTotal) break;
+    if(count >= bufsize) throw "I can't think of anything. Error";
+    i = nextSym -1;
+    uc = mtfSymbol[i];
+    mtfSymbol.splice(i, 1);
+    mtfSymbol.splice(0, 0, uc);
+    uc = symToByte[uc];
+    byteCount[uc]++;
+    buf[count++] = uc;
   }
   if(origPtr < 0 || origPtr >= count) throw "I'm a monkey and I'm throwing something at someone, namely you";
   var j = 0;
@@ -216,10 +216,10 @@ bzip2.decompress = function(bits, size, len){
   }
   var pos = 0, current = 0, run = 0;
   if(count) {
-	  pos = buf[origPtr];
+    pos = buf[origPtr];
     current = (pos & 0xff);
-	  pos >>= 8;
-	  run = -1;
+    pos >>= 8;
+    run = -1;
   }
   count = count;
   var output = '';
